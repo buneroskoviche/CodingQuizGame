@@ -1,0 +1,40 @@
+/* Center align everything on the page */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Format the title text to be large and in the center */
+h1 {
+    font-size: 400%;
+    text-align: center;
+    height: auto;
+    width: auto;
+    padding: 5%;
+}
+
+/* Format the subtitle text to be centered, but smaller */
+h2 {
+    font-size: 200%;
+    text-align: center;
+    height: auto;
+    width: auto;
+    padding: 5%;
+}
+
+/* Center align the middle section under the title */
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Center align the buttons */
+#start {
+    font-size: 200%;
+    text-align: center;
+    width: 4em;
+}
