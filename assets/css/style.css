@@ -4,6 +4,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 /* Format the title text to be large and in the center */
@@ -37,4 +38,16 @@ section {
     font-size: 200%;
     text-align: center;
     width: 4em;
+}
+
+/* Move the timer box into the top right corner */
+#timerBox {
+    height: 5em;
+    width: 5em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
