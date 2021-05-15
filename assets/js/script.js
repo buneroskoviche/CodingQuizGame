@@ -3,10 +3,11 @@ const $startButton = document.querySelector("#start");
 const $title = document.querySelector("h1");
 const $subtitle = document.querySelector("h2");
 const $section = document.querySelector("section");
+const $form = document.querySelector("form");
 const $timerBox = document.querySelector("#timerBox");
 const $choices = document.querySelector("#choices");
 
-let testTime = 80;
+let testTime = 60;
 
 
 const questionOne = [ "Which of the following is NOT a Javascript data type?", 1,
@@ -39,7 +40,7 @@ const questionFour = [ "What needs to be called in order to exit a function?", 4
 // When you click the "Start" button, run the startGame function and load the first question
 $startButton.addEventListener("click", startGame);
 
-// Add a click listener to the option buttons
+// Add a click listener to the choices list for the buttons that will generate
 $choices.addEventListener('click', function(clicked) {
     // Assign a variable to what was clicked
     let element = clicked.target;
@@ -64,23 +65,26 @@ $choices.addEventListener('click', function(clicked) {
     };
 });
 
+// Add a function to form buttons to 
 
-// Define the startGame function
+// Define the function that starts the game
 function startGame() {
+    // Reset the countdown timer
+    testTime = 60;
     // Start a countdown using setInterval
     countdown = setInterval(() => {
         // Every loop, subtract 1 from testTime
         testTime--;
         // Change the timer text on screen to match the current time
         $timerBox.textContent = testTime;
-        // Check if the time is 0, if so, end the countdown
+        // Check if the time is 0, if so...
         if(testTime === 0) {
-            clearInterval(countdown);
+            // Run the function that ends the game
             endGame();
         }
     }, 1000);
     // Clear the subtitle
-    $subtitle.remove();
+    $subtitle.textContent = "";
     // Remove the Start button
     $startButton.remove();
     // Load the first question
@@ -116,7 +120,32 @@ function askQuestion(array) {
     return;
 };
 
-// Define the endGame function
+// Define the function that ends the game
 function endGame() {
-    console.log("It's over!!!")
+    // Stop the timer
+    clearInterval(countdown);
+    // Change the title text
+    $title.textContent = "Game Over!";
+    // Clear the buttons out of the ordered list
+    $choices.innerHTML = "";
+    // Add text back into the subtitle
+    $subtitle.textContent = `You scored ${testTime} points.`
+    // Create a form element where there user can type in their name and save their score
+    const $saveData = document.createElement('form');
+    $saveData.setAttribute("class", "saveData");
+    // Create a text input for the form
+    let nameInput = document.createElement("input");
+    nameInput.setAttribute("type", "text");
+    nameInput.setAttribute("placeholder", "Your name here");
+    // Add the text field to the form
+    $saveData.appendChild(nameInput);
+    // Create a button input for the form
+    let buttonInput = document.createElement("input");
+    buttonInput.setAttribute("type", "button");
+    buttonInput.setAttribute("value", "Save");
+    // Add the button to the form
+    $saveData.appendChild(buttonInput);
+    console.log($saveData);
+    // Add the form under the subtitle
+    $section.appendChild($saveData);
 }
