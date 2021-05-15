@@ -39,6 +39,17 @@ const questionFour = [ "What needs to be called in order to exit a function?", 4
     {option: "Nothing", value: false}
 ]
 
+const questionFive = [ "How do you define an object?", 5,
+    {option: "{Curly brackets}", value: true},
+    {option: "[Square brackets]", value: false},
+    {option: "<Alligators>", value: false},
+    {option: "(Parentheses)", value: false}
+]
+
+// Add the saved highscores to an array
+let getHighscores = JSON.parse(localStorage.getItem('highscores'));
+getHighscores.push(highscoresArray);
+console.log(highscoresArray);
 
 // Create a form and elements where there user can type in their name and save their score
 $saveData.setAttribute("class", "saveData");
@@ -73,11 +84,6 @@ resetButton.addEventListener("click", function() {
     startGame();
 });
 
-// Add the saved highscores to an array
-let getHighscores = JSON.parse(localStorage.getItem('highscores'));
-getHighscores.push(highscoresArray);
-console.log(highscoresArray);
-
 // When you click the "Start" button, run the startGame function and load the first question
 $startButton.addEventListener("click", startGame);
 
@@ -101,7 +107,9 @@ $choices.addEventListener('click', function(clicked) {
         } else if (qNumber == 2) {
             askQuestion(questionThree);
         } else if (qNumber == 3) {
-            askQuestion(questionFour)
+            askQuestion(questionFour);
+        } else if (qNumber == 4) {
+            askQuestion(questionFive);
         } else {
             endGame();
         }
