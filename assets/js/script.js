@@ -48,7 +48,7 @@ const questionFive = [ "How do you define an object?", 5,
 
 // Add the saved highscores to an array
 let getHighscores = JSON.parse(localStorage.getItem('highscores'));
-if (getHighscores !== null || getHighscores !== undefined) {
+if (getHighscores !== null && getHighscores !== undefined) {
     highscoresArray.push(getHighscores);
 };
 console.log(highscoresArray);
