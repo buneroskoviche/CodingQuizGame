@@ -49,7 +49,8 @@ const questionFive = [ "How do you define an object?", 5,
 // Add the saved highscores to an array
 let getHighscores = JSON.parse(localStorage.getItem('highscores'));
 if (getHighscores !== null || getHighscores !== undefined) {
-    getHighscores.push(highscoresArray);};
+    highscoresArray.push(getHighscores);
+};
 console.log(highscoresArray);
 
 // Create a form and elements where there user can type in their name and save their score
