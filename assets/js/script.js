@@ -10,6 +10,7 @@ const $saveData = document.createElement("form");
 let scoreList = document.createElement("ol");
 let testTime;
 let highscoresArray = [];
+console.log(highscoresArray);
 
 
 const questionOne = [ "Which of the following is NOT a Javascript data type?", 1,
@@ -51,7 +52,6 @@ let getHighscores = JSON.parse(localStorage.getItem('highscores'));
 if (getHighscores !== null && getHighscores !== undefined) {
     highscoresArray.push(getHighscores);
 };
-console.log(highscoresArray);
 
 // Create a form and elements where there user can type in their name and save their score
 $saveData.setAttribute("class", "saveData");
