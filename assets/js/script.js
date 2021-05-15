@@ -48,7 +48,8 @@ const questionFive = [ "How do you define an object?", 5,
 
 // Add the saved highscores to an array
 let getHighscores = JSON.parse(localStorage.getItem('highscores'));
-getHighscores.push(highscoresArray);
+if (getHighscores !== null) {
+    getHighscores.push(highscoresArray);};
 console.log(highscoresArray);
 
 // Create a form and elements where there user can type in their name and save their score
@@ -222,8 +223,8 @@ function displayHighscores() {
         }
         scoreList.appendChild(scoreEntry);
     }
-    // Add the list to the page
+    // Add the list of scores to the page
     $section.appendChild(scoreList);
-    // Add the button to the section
+    // Add the Replay button to the section
     $section.appendChild(resetButton);
 }
