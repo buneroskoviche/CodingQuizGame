@@ -1,14 +1,48 @@
-// Declare a variable for the start button
+// Declare a variables
 const $startButton = document.querySelector("#start");
 const $title = document.querySelector("h1");
 const $subtitle = document.querySelector("h2");
 const $section = document.querySelector("section");
-const $form = document.querySelector("form");
 const $timerBox = document.querySelector("#timerBox");
 const $choices = document.querySelector("#choices");
 
-let testTime = 60;
+let nameInput = document.createElement("input");
 
+// Create a button that will save the score and load the next page
+let buttonInput = document.createElement("input");
+buttonInput.setAttribute("type", "button");
+buttonInput.setAttribute("value", "Save");
+// Add a function to the 'save' button
+buttonInput.addEventListener("click", function(event) {
+    // Stop the page from refreshing
+    event.preventDefault();
+    // Save the score
+    saveScore();
+    // Display the list of high scores
+    displayHighscores();
+})
+
+// Create a button that will reset the game
+let resetButton = document.createElement("button");
+resetButton.textContent = "Replay";
+// Set the function of the button to replay the game to clear out the list and restart
+resetButton.addEventListener("click", function() {
+    resetButton.remove();
+    scoreList.innerHTML = "";
+    scoreList.remove();
+    startGame();
+});
+
+const $saveData = document.createElement("form");
+let scoreList = document.createElement("ol");
+
+let testTime;
+let highscoresArray = [];
+
+// Add the saved highscores to an array
+let getHighscores = JSON.parse(localStorage.getItem('highscores'));
+getHighscores.push(highscoresArray);
+console.log(highscoresArray);
 
 const questionOne = [ "Which of the following is NOT a Javascript data type?", 1,
     {option: "Boolean", value: false},
@@ -65,8 +99,6 @@ $choices.addEventListener('click', function(clicked) {
     };
 });
 
-// Add a function to form buttons to 
-
 // Define the function that starts the game
 function startGame() {
     // Reset the countdown timer
@@ -87,6 +119,7 @@ function startGame() {
     $subtitle.textContent = "";
     // Remove the Start button
     $startButton.remove();
+    // remove
     // Load the first question
     askQuestion(questionOne);
 }
@@ -131,21 +164,55 @@ function endGame() {
     // Add text back into the subtitle
     $subtitle.textContent = `You scored ${testTime} points.`
     // Create a form element where there user can type in their name and save their score
-    const $saveData = document.createElement('form');
     $saveData.setAttribute("class", "saveData");
     // Create a text input for the form
-    let nameInput = document.createElement("input");
     nameInput.setAttribute("type", "text");
+    nameInput.setAttribute("class", "name");
     nameInput.setAttribute("placeholder", "Your name here");
     // Add the text field to the form
     $saveData.appendChild(nameInput);
-    // Create a button input for the form
-    let buttonInput = document.createElement("input");
-    buttonInput.setAttribute("type", "button");
-    buttonInput.setAttribute("value", "Save");
     // Add the button to the form
     $saveData.appendChild(buttonInput);
-    console.log($saveData);
     // Add the form under the subtitle
     $section.appendChild($saveData);
+}
+
+// Define a function that will save the users score and name
+function saveScore() {
+    // Create an object containing the name entered and score
+    let scoreSaved = {
+        name: nameInput.value,
+        score: testTime,
+    };
+    console.log(scoreSaved);
+    // Add the object to the highscores array
+    highscoresArray.push(scoreSaved);
+    // Save the highscores array to local storage
+    localStorage.setItem('highscores', JSON.stringify(highscoresArray));
+}
+
+// Define a function that will retrieve and display the highscore list
+function displayHighscores() {
+    // Get the new high scores array
+    let newScores = JSON.parse(localStorage.getItem('highscores'));
+    // Remove the text from the title
+    $title.textContent = "";
+    // Change the text of the subtitle
+    $subtitle.textContent = "Your high scores"
+    // Remove the form
+    $saveData.remove();
+    // Use a loop to add the top 5 scores to the ordered list
+    for (i = 0; i < 4; i++) {
+        let scoreEntry = document.createElement("li");
+        if (newScores[i] !== undefined) {
+            scoreEntry.textContent = `${newScores[i].name}          ${newScores[i].score}`;
+        } else {
+            scoreEntry.textContent = "";
+        }
+        scoreList.appendChild(scoreEntry);
+    }
+    // Add the list to the page
+    $section.appendChild(scoreList);
+    // Add the button to the section
+    $section.appendChild(resetButton);
 }
