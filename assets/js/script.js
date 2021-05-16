@@ -206,8 +206,7 @@ function endGame() {
     // Add text back into the subtitle
     $subtitle.textContent = `You scored ${testTime} points.`
     // Use an if statement to see if you made it on the high score board
-    if (testTime >= highscoresArray[highscoresArray.length - 1].score 
-        && testTime > 0
+    if (testTime >= highscoresArray[highscoresArray.length - 1].score
         || highscoresArray.length === 1) {
         // Add the text field to the form
         $saveData.appendChild(nameInput);
@@ -256,7 +255,7 @@ function displayHighscores() {
     // Remove the text from the title
     $title.textContent = "";
     // Change the text of the subtitle
-    $subtitle.textContent = "Your high scores"
+    $subtitle.textContent = "High scores"
     // Remove the form
     $saveData.remove();
     // Use a loop to add the top 10 scores/names to the respective list
