@@ -123,7 +123,6 @@ $choices.addEventListener('click', function(clicked) {
         // If the button does not have a class of 'correct'
         if (element.getAttribute("class") !== 'correct') {
             // Remove 10 seconds from the timer
-            console.log("Wrong!");
             testTime = testTime - 10;
         }
         // Go through a series of checks to see what question we are on, then load the next question
@@ -230,7 +229,7 @@ function saveScore() {
     };
     // Use a loop to compare the new score to all the saved scores, then splice it into the right place
     for (i = 0; i < highscoresArray.length; i++) {
-        if (scoreSaved.score > highscoresArray[i].score) {
+        if (scoreSaved.score >= highscoresArray[i].score) {
             highscoresArray.splice(i, 0, scoreSaved);
             break;
         // If the score is the lowest, push it into the end of the array
@@ -239,8 +238,9 @@ function saveScore() {
             break;
         }
     }
-    // If the highscore list has more than 10 entries, or the last item has 0 points, remove the last item
+    // If the highscore list has more than 10 entries, or the last item has 0 points...
     if (highscoresArray.length > 10 || highscoresArray[highscoresArray.length - 1].score === 0) {
+        // Remove the last item
         highscoresArray.pop();
     };
     // Save the highscores array to local storage
