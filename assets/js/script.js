@@ -208,8 +208,8 @@ function endGame() {
     $subtitle.textContent = `You scored ${testTime} points.`
     // Use an if statement to see if you made it on the high score board
     if (testTime >= highscoresArray[highscoresArray.length - 1].score
-        || testTime > 0
-        || highscoresArray.length === 1) {
+        || highscoresArray.length === 1
+        && testTime > 0) {
         // Add the text field to the form
         $saveData.appendChild(nameInput);
         // Add the button to the form
