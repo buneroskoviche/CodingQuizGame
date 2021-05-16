@@ -7,8 +7,8 @@ const $timerBox = document.querySelector("#timerBox");
 const $choices = document.querySelector("#choices");
 let nameInput = document.createElement("input");
 const $saveData = document.createElement("form");
-let testTime;
 let highscoresArray = [];
+let testTime;
 console.log(highscoresArray);
 
 const questionOne = [ "Which of the following is NOT a Javascript data type?", 1,
@@ -45,13 +45,20 @@ const questionFive = [ "How do you define an object?", 5,
     {option: "(Parentheses)", value: false}
 ]
 
-// Add the saved highscores to an array
+// Get the saved highscores from local storage
 let getHighscores = JSON.parse(localStorage.getItem('highscores'));
 if (getHighscores !== null && getHighscores !== undefined) {
     for (i = 0; i < 10; i++) {
+        // If any entries are empty, stop the loop
+        if (getHighscores[i] === undefined) {
+            break;
+        }
         highscoresArray.push(getHighscores[i]);
     };
     console.log(highscoresArray);
+} else {
+    // Put in an empty entry if there aren't any scores
+    highscoresArray.push({name: "", score: 0});
 };
 
 // Create ordered list elements to be used for displaying the high scores, and a container for them
@@ -95,6 +102,8 @@ resetButton.textContent = "Replay";
 // Set the function of the button to replay the game to clear out the list and restart
 resetButton.addEventListener("click", function() {
     resetButton.remove();
+    playerNames.innerHTML = "";
+    playerScores.innerHTML = "";
     scoreBox.innerHTML = "";
     scoreBox.remove();
     startGame();
@@ -197,7 +206,9 @@ function endGame() {
     // Add text back into the subtitle
     $subtitle.textContent = `You scored ${testTime} points.`
     // Use an if statement to see if you made it on the high score board
-    if (testTime >= highscoresArray[highscoresArray.length - 1].score && testTime > 0) {
+    if (testTime >= highscoresArray[highscoresArray.length - 1].score 
+        && testTime > 0
+        || highscoresArray.length === 1) {
         // Add the text field to the form
         $saveData.appendChild(nameInput);
         // Add the button to the form
@@ -229,8 +240,8 @@ function saveScore() {
             break;
         }
     }
-    // If the highscore list has more than 10 entries, remove the last item
-    if (highscoresArray.length > 10) {
+    // If the highscore list has more than 10 entries, or the last item has 0 points, remove the last item
+    if (highscoresArray.length > 10 || highscoresArray[highscoresArray.length - 1].score === 0) {
         highscoresArray.pop();
     };
     // Save the highscores array to local storage
