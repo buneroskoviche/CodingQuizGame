@@ -5,8 +5,9 @@ const $subtitle = document.querySelector("h2");
 const $section = document.querySelector("section");
 const $timerBox = document.querySelector("#timerBox");
 const $choices = document.querySelector("#choices");
-let nameInput = document.createElement("input");
 const $saveData = document.createElement("form");
+const wrongSFX = document.querySelector("#wrongSFX")
+let nameInput = document.createElement("input");
 let highscoresArray = [];
 let testTime;
 console.log(highscoresArray);
@@ -124,6 +125,7 @@ $choices.addEventListener('click', function(clicked) {
         if (element.getAttribute("class") !== 'correct') {
             // Remove 10 seconds from the timer
             testTime = testTime - 10;
+            wrongSFX.play();
         }
         // Go through a series of checks to see what question we are on, then load the next question
         if (qNumber == 1) {
@@ -206,6 +208,7 @@ function endGame() {
     $subtitle.textContent = `You scored ${testTime} points.`
     // Use an if statement to see if you made it on the high score board
     if (testTime >= highscoresArray[highscoresArray.length - 1].score
+        || testTime > 0
         || highscoresArray.length === 1) {
         // Add the text field to the form
         $saveData.appendChild(nameInput);
