@@ -5,19 +5,27 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    background-color: darkslategray;
 }
 
-header {
+.container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    width: 100%;
+    width: 70em;
+    height: 45em;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 10px 10px 18px black;
+    position: relative;
 } 
 
 /* Format the title text to be large and in the center */
 h1 {
+    position: absolute;
+    top: 5px;
     font-size: 400%;
     text-align: center;
     height: auto;
@@ -31,7 +39,7 @@ h2 {
     text-align: center;
     height: auto;
     width: 70%;
-    padding: 5%;
+    padding: 2%;
 }
 
 /* Center align the middle section under the title */
@@ -42,6 +50,31 @@ section {
     flex-direction: column;
     width: 80%;
 }
+
+/* Space the answer buttons nicely */
+#choices {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 80%;
+}
+
+button {
+    color: whitesmoke;
+    background-color: #008CBA;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+button:hover {
+    color: #008CBA;
+    background-color: white;
+    box-shadow: 0 0 5px #008CBA;
+    border-radius: 10px;
+    padding: 20px;
+}
+
 
 /* Center align the buttons */
 #start {
@@ -55,7 +88,7 @@ section {
     height: 5em;
     width: 5em;
     position: absolute;
-    top: 0;
+    bottom: 0;
     right: 0;
     display: flex;
     justify-content: center;

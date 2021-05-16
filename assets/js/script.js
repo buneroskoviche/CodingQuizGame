@@ -206,6 +206,10 @@ function saveScore() {
         if (scoreSaved.score > highscoresArray[i].score) {
             highscoresArray.splice(i, 0, scoreSaved);
             break;
+        // If the score is the lowest, push it into the end of the array
+        } else if (scoreSaved.score < highscoresArray[highscoresArray.length - 1].score) {
+            highscoresArray.push(scoreSaved);
+            break;
         }
     }
     // Save the highscores array to local storage
@@ -223,7 +227,7 @@ function displayHighscores() {
     // Remove the form
     $saveData.remove();
     // Use a loop to add the top 5 scores to the ordered list
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < 11; i++) {
         let scoreEntry = document.createElement("li");
         if (newScores[i] !== undefined) {
             scoreEntry.textContent = `${newScores[i].name}          ${newScores[i].score}`;
