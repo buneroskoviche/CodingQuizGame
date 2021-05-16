@@ -8,6 +8,7 @@ body {
     background-color: darkslategray;
 }
 
+/* Create a white box to put all the things in */
 .container {
     display: flex;
     flex-direction: column;
@@ -59,6 +60,7 @@ section {
     width: 80%;
 }
 
+/* Make the buttons pretty */
 button {
     color: whitesmoke;
     background-color: #008CBA;
@@ -67,6 +69,7 @@ button {
     padding: 20px;
 }
 
+/* Make the colors of the buttons invert when hovered */
 button:hover {
     color: #008CBA;
     background-color: white;
@@ -93,4 +96,18 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Space the save form nicely */
+.saveData {
+    width: 35%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* Space the list of high scores nicely */
+.scoreBox {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
 }

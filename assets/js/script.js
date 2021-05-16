@@ -7,7 +7,6 @@ const $timerBox = document.querySelector("#timerBox");
 const $choices = document.querySelector("#choices");
 let nameInput = document.createElement("input");
 const $saveData = document.createElement("form");
-let scoreList = document.createElement("ol");
 let testTime;
 let highscoresArray = [];
 console.log(highscoresArray);
@@ -49,11 +48,19 @@ const questionFive = [ "How do you define an object?", 5,
 // Add the saved highscores to an array
 let getHighscores = JSON.parse(localStorage.getItem('highscores'));
 if (getHighscores !== null && getHighscores !== undefined) {
-    for (i = 0; i < getHighscores.length; i++) {
+    for (i = 0; i < 10; i++) {
         highscoresArray.push(getHighscores[i]);
     };
     console.log(highscoresArray);
 };
+
+// Create ordered list elements to be used for displaying the high scores, and a container for them
+const playerNames = document.createElement("ol");
+playerNames.setAttribute("class", "playerNames");
+const playerScores = document.createElement("ol");
+playerScores.setAttribute("class", "playerScores");
+const scoreBox = document.createElement("div");
+scoreBox.setAttribute("class", "scoreBox")
 
 // Create a form and elements where there user can type in their name and save their score
 $saveData.setAttribute("class", "saveData");
@@ -237,18 +244,27 @@ function displayHighscores() {
     $subtitle.textContent = "Your high scores"
     // Remove the form
     $saveData.remove();
-    // Use a loop to add the top 5 scores to the ordered list
-    for (i = 0; i < 11; i++) {
+    // Use a loop to add the top 10 scores/names to the respective list
+    for (i = 0; i < 10; i++) {
+        let nameEntry = document.createElement("li");
+        if (newScores[i] !== undefined) {
+            nameEntry.textContent = newScores[i].name;
+        } else {
+            nameEntry.textContent = "";
+        }
+        playerNames.appendChild(nameEntry);
         let scoreEntry = document.createElement("li");
         if (newScores[i] !== undefined) {
-            scoreEntry.textContent = newScores[i].name + "            " + newScores[i].score;
+            scoreEntry.textContent = newScores[i].score;
         } else {
             scoreEntry.textContent = "";
         }
-        scoreList.appendChild(scoreEntry);
+        playerScores.appendChild(scoreEntry);
     }
-    // Add the list of scores to the page
-    $section.appendChild(scoreList);
+    // Add the lists to the scoreBox and the scoreBox to the page
+    scoreBox.appendChild(playerNames);
+    scoreBox.appendChild(playerScores);
+    $section.appendChild(scoreBox);
     // Add the Replay button to the section
     $section.appendChild(resetButton);
     return;
