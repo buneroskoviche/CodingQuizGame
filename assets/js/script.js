@@ -186,12 +186,19 @@ function endGame() {
     $choices.innerHTML = "";
     // Add text back into the subtitle
     $subtitle.textContent = `You scored ${testTime} points.`
-    // Add the text field to the form
-    $saveData.appendChild(nameInput);
-    // Add the button to the form
-    $saveData.appendChild(buttonInput);
-    // Add the form under the subtitle
-    $section.appendChild($saveData);
+    // Use an if statement to see if no points were scored
+    if (testTime === 0) {
+        // Add the Replay button to the section
+        $section.appendChild(resetButton);
+    } else {
+        // Add the text field to the form
+        $saveData.appendChild(nameInput);
+        // Add the button to the form
+        $saveData.appendChild(buttonInput);
+        // Add the form under the subtitle
+        $section.appendChild($saveData);
+    }
+    return;
 }
 
 // Define a function that will save the users score and name
@@ -214,6 +221,7 @@ function saveScore() {
     }
     // Save the highscores array to local storage
     localStorage.setItem('highscores', JSON.stringify(highscoresArray));
+    return;
 }
 
 // Define a function that will retrieve and display the highscore list
@@ -230,7 +238,7 @@ function displayHighscores() {
     for (i = 0; i < 11; i++) {
         let scoreEntry = document.createElement("li");
         if (newScores[i] !== undefined) {
-            scoreEntry.textContent = `${newScores[i].name}          ${newScores[i].score}`;
+            scoreEntry.textContent = newScores[i].name + "            " + newScores[i].score;
         } else {
             scoreEntry.textContent = "";
         }
@@ -240,4 +248,5 @@ function displayHighscores() {
     $section.appendChild(scoreList);
     // Add the Replay button to the section
     $section.appendChild(resetButton);
+    return;
 }
