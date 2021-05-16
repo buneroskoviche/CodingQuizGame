@@ -10,7 +10,6 @@ const wrongSFX = document.querySelector("#wrongSFX")
 let nameInput = document.createElement("input");
 let highscoresArray = [];
 let testTime;
-console.log(highscoresArray);
 
 const questionOne = [ "Which of the following is NOT a Javascript data type?", 1,
     {option: "Boolean", value: false},
@@ -208,7 +207,7 @@ function endGame() {
     $subtitle.textContent = `You scored ${testTime} points.`
     // Use an if statement to see if you made it on the high score board
     if (testTime >= highscoresArray[highscoresArray.length - 1].score
-        || highscoresArray.length === 1
+        || highscoresArray.length >= 1
         && testTime > 0) {
         // Add the text field to the form
         $saveData.appendChild(nameInput);
