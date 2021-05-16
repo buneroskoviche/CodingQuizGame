@@ -95,8 +95,8 @@ resetButton.textContent = "Replay";
 // Set the function of the button to replay the game to clear out the list and restart
 resetButton.addEventListener("click", function() {
     resetButton.remove();
-    scoreList.innerHTML = "";
-    scoreList.remove();
+    scoreBox.innerHTML = "";
+    scoreBox.remove();
     startGame();
 });
 
@@ -196,17 +196,17 @@ function endGame() {
     $choices.innerHTML = "";
     // Add text back into the subtitle
     $subtitle.textContent = `You scored ${testTime} points.`
-    // Use an if statement to see if no points were scored
-    if (testTime === 0) {
-        // Add the Replay button to the section
-        $section.appendChild(resetButton);
-    } else {
+    // Use an if statement to see if you made it on the high score board
+    if (testTime >= highscoresArray[highscoresArray.length - 1].score && testTime > 0) {
         // Add the text field to the form
         $saveData.appendChild(nameInput);
         // Add the button to the form
         $saveData.appendChild(buttonInput);
         // Add the form under the subtitle
         $section.appendChild($saveData);
+    } else {
+        // Add the Replay button to the section instead
+        $section.appendChild(resetButton);
     }
     return;
 }
@@ -229,6 +229,10 @@ function saveScore() {
             break;
         }
     }
+    // If the highscore list has more than 10 entries, remove the last item
+    if (highscoresArray.length > 10) {
+        highscoresArray.pop();
+    };
     // Save the highscores array to local storage
     localStorage.setItem('highscores', JSON.stringify(highscoresArray));
     return;
