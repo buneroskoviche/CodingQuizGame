@@ -12,7 +12,6 @@ let testTime;
 let highscoresArray = [];
 console.log(highscoresArray);
 
-
 const questionOne = [ "Which of the following is NOT a Javascript data type?", 1,
     {option: "Boolean", value: false},
     {option: "Number", value: false},
@@ -66,6 +65,11 @@ nameInput.setAttribute("placeholder", "Your name here");
 let buttonInput = document.createElement("input");
 buttonInput.setAttribute("type", "button");
 buttonInput.setAttribute("value", "Save");
+// Stop the enter key from resetting the page
+nameInput.addEventListener('keydown', function(key) {
+    if (key.key === "Enter") {
+        key.preventDefault();
+    }});
 // Add a function to the 'save' button
 buttonInput.addEventListener("click", function(event) {
     // Stop the page from refreshing
@@ -141,7 +145,6 @@ function startGame() {
     $subtitle.textContent = "";
     // Remove the Start button
     $startButton.remove();
-    // remove
     // Load the first question
     askQuestion(questionOne);
 }
