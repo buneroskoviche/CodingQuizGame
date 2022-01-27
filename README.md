@@ -6,7 +6,7 @@ Ten high scores will be saved and displayed once the quiz is complete.
 See if you can beat my score!
 
 # Link
-https://buneroskoviche.github.io/CodingQuizGame/
+https://dk-code93.github.io/CodingQuizGame/
 
 # Screenshots
 ![Screenshot3](https://user-images.githubusercontent.com/80650523/118410753-55e97680-b64e-11eb-82bd-34ddd41e50ce.PNG)
